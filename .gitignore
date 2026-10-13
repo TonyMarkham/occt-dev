@@ -1,0 +1,12 @@
+# OCCT source/build scratch area and stage logs (occt-linux.md / occt-mac.md)
+tmp/
+
+# Local native distributions (README.md "Output layout")
+dist/
+
+# Sample consumer build tree and its STEP artifact (sample/build/)
+sample/build/
+
+# Editors/IDE
+.idea/
+.vs/
