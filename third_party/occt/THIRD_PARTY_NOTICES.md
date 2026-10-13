@@ -1,8 +1,8 @@
 # Third-party notices — OCCT 8.0.1
 
 These notices cover the binaries contained in the
-`occt-8.0.1-x86_64-windows-*.zip` and `occt-8.0.1-x86_64-linux-*.zip`
-archives built from this repository.
+`occt-8.0.1-x86_64-windows-*.zip`, `occt-8.0.1-x86_64-linux-*.zip`, and
+`occt-8.0.1-arm64-macos-*.zip` archives built from this repository.
 
 ## Open CASCADE Technology (OCCT)
 
@@ -14,14 +14,20 @@ archives built from this repository.
     the toolkits build as plain unversioned `libTK*.so` files (see
     `occt-linux.md`, section 2.1). The modification is part of the
     build inputs, not a binary patch.
+  - **macOS build:** the same one local modification as Linux — the
+    `SOVERSION`/`VERSION` target properties in
+    `adm/cmake/occt_toolkit.cmake` are removed so the toolkits build as
+    plain unversioned `libTK*.dylib` files (see `occt-mac.md`, section
+    2.1). The modification is part of the build inputs, not a binary
+    patch.
 - **License:** GNU Lesser General Public License version 2.1, with the
   OCCT LGPL exception.
 - **Full license texts, included in every archive:**
   `LICENSE_LGPL_21.txt`, `OCCT_LGPL_EXCEPTION.txt` (verbatim copies of
   the files at the source root above). Each dev archive additionally
-  carries them under `share/doc/opencascade/` (the Windows guide's
-  `INSTALL_DIR_LAYOUT=Unix` gives both platforms the same relative
-  layout).
+  carries them under `share/doc/opencascade/` (all three guides
+  configure `INSTALL_DIR_LAYOUT=Unix`, so every install shares the same
+  relative layout).
 - **Binary provenance:**
   - **Windows x64:** built 2026-10-13 with MSVC 19.44.35229 (Visual
     Studio 2022 17.14, vc14 toolset), CMake + Ninja, Release, shared
@@ -32,6 +38,12 @@ archives built from this repository.
     15.2.0, CMake + Ninja, Release, shared libraries (.so). Configure
     switches: `BUILD_MODULE_Draw=OFF`, `USE_FREETYPE=OFF`,
     `INSTALL_DIR_LAYOUT=Unix` — full command in `occt-linux.md`,
+    section 2.2.
+  - **macOS arm64:** built 2026-10-13 on macOS 27.0.1 with Apple clang
+    21.0.0 (Command Line Tools 27.0.0), CMake 4.2.0 + Ninja, Release,
+    shared libraries (.dylib). Configure switches:
+    `BUILD_MODULE_Draw=OFF`, `USE_FREETYPE=OFF`,
+    `INSTALL_DIR_LAYOUT=Unix` — full command in `occt-mac.md`,
     section 2.2.
 
 ## Bundled third-party code inside the built toolkits
@@ -57,3 +69,8 @@ archives built from this repository.
   supplied by Ubuntu: `GL` and `X11` (via `libgl1-mesa-dev` /
   `libx11-dev`), plus `pthread`, `rt`, `dl`, and `libm`/`libstdc++`
   from glibc/GCC — system-provided, none shipped in the archives.
+- **macOS:** none redistributed. The same optional third-party support
+  is compiled out in this build (see the configure switches above).
+  The only non-OCCT libraries linked are operating-system components
+  supplied by macOS: the AppKit, IOKit, and OpenGL frameworks, plus
+  `objc` and libSystem — system-provided, none shipped in the archives.
